@@ -71,13 +71,13 @@ export default {
       else {
         this.id = JSON.parse(localStorage.getItem('info')).id
         try {
-          const r = await axios.delete("http://127.0.0.1:5000/api/user_check_permission", null, {
+          const r = await axios.delete("https://blob-backend4.onrender.com/api/user_check_permission", null, {
             headers: {
               Authorization: `Bearer ${access_token}`
             }
           });
           if (r.status === 200) {
-            const response=await axios.get(`http://127.0.0.1:5000/api/getInfoBlog/${this.$route.params.id}`);
+            const response=await axios.get(`https://blob-backend4.onrender.com/api/getInfoBlog/${this.$route.params.id}`);
             if(response.status==200){
                 this.title=response.data.blog['blog_subtitle'];
                 this.name=response.data.blog['blog_name'];
@@ -104,7 +104,7 @@ export default {
         },
         async edit_blog(){
             try{
-                const response=await axios.post(`http://127.0.0.1:5000/api/edit_blob/${this.$route.params.id}`,
+                const response=await axios.post(`https://blob-backend4.onrender.com/api/edit_blob/${this.$route.params.id}`,
                     JSON.stringify({
                     title:this.name,
                     subtitle:this.title,
