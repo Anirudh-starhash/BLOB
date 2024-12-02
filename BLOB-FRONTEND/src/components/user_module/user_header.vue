@@ -5,8 +5,10 @@
         <div class="content">
           <div class="left">
             <p class="nav-item dashboard" @click="userdash">Dashboard</p>
+           
           </div>
           <div class="right">
+            <p class="nav-item" v-if="showProfile"  @click="profile">Profile Page</p>
             <p class="nav-item" v-if="showOtherUsers" @click="otherusers">Other-Users-Page</p>
             <p class="nav-item" v-if="showStats" @click="stats">Stats</p>
             <p class="nav-item" v-if="showRequests" @click="requests_form">Requests-Admin</p>
@@ -123,7 +125,7 @@ header {
   align-items: center;
 }
 
-.dashboard {
+.dashboard,.profilepage {
   color: #ffc107;
   font-size: 20px;
   font-family: 'Poppins', sans-serif;
