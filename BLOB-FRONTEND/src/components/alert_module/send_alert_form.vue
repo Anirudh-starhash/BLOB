@@ -79,7 +79,7 @@ export default {
       else {
         this.id = JSON.parse(localStorage.getItem('info')).id
         try {
-          const r = await axios.post("https://blob-backend4.onrender.com/api/user_check_permission", null, {
+          const r = await axios.post("https://blob-backend.onrender.com//api/user_check_permission", null, {
             headers: {
               Authorization: `Bearer ${access_token}`
             }
@@ -103,7 +103,7 @@ export default {
             this.$router.go(-1);
         },
         async send1(){
-            const r=await axios.post(`https://blob-backend4.onrender.com/api/sendAlert/${this.id}`,
+            const r=await axios.post(`https://blob-backend.onrender.com//api/sendAlert/${this.id}`,
                     JSON.stringify({
                      alertMsg:this.alertmessage,
                      name:this.name,

@@ -140,7 +140,7 @@
       },
       async grant(user,user_id){
         try{
-          const r=await axios.post("http://127.0.0.1:5000/api/grantUser",
+          const r=await axios.post("https://blob-backend.onrender.com/api/grantUser",
             JSON.stringify({
               'user_id':user_id,
             }),
@@ -172,7 +172,7 @@
       },
       async reject(user,user_id){
         try{
-          const r=await axios.post("http://127.0.0.1:5000/api/rejectUser",
+          const r=await axios.post("https://blob-backend.onrender.com/api/rejectUser",
             JSON.stringify({
               "user_id":user_id,
             }),
@@ -213,7 +213,7 @@
       }
       else{
           try{
-          const r=await axios.post("http://127.0.0.1:5000/api/lib_check_permission",null,
+          const r=await axios.post("https://blob-backend.onrender.com/api/lib_check_permission",null,
             {
               headers:{
                 Authorization:`Bearer ${access_token}`
@@ -222,7 +222,7 @@
           );
   
           if(r.status===200){
-            const response=await axios.get(`http://127.0.0.1:5000/api/getAllRequests`);
+            const response=await axios.get(`https://blob-backend.onrender.com/api/getAllRequests`);
             if(response.status===200){
               this.granted_users=response.data["issued_users"];
               this.requested_users=response.data["requested_users"];

@@ -94,7 +94,7 @@ export default {
     async user_login() {
       try {
         const response = await axios.post(
-          "http://127.0.0.1:5000/api/user_login",
+          "https://blob-backend.onrender.com/api/user_login",
           JSON.stringify({
             email: this.email,
             password: this.password,

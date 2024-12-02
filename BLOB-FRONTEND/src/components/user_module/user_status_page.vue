@@ -105,7 +105,7 @@ export default {
       this.alertmessage = prompt("Enter the disaster name\n");
       this.id = JSON.parse(localStorage.getItem("info")).id;
       const r = await axios.post(
-        `http://127.0.0.1:5000/api/sendAlert/${this.id}`,
+        `https://blob-backend.onrender.com/api/sendAlert/${this.id}`,
         JSON.stringify({
           alertMsg: this.alertmessage,
         }),
@@ -124,7 +124,7 @@ export default {
       alert("Returning privilege status...");
       this.id = JSON.parse(localStorage.getItem("info")).id;
       const response = await axios.get(
-        `http://127.0.0.1:5000/api/return_Status/${this.id}`
+        `https://blob-backend.onrender.com/api/return_Status/${this.id}`
       );
       if (response.status === 200) {
         alert("Privilege status returned!");
@@ -138,7 +138,7 @@ export default {
       try {
         let info = JSON.parse(localStorage.getItem("info"));
         const r = await axios.get(
-          `http://127.0.0.1:5000/api/generate_user_report/${info.id}`
+          `https://blob-backend.onrender.com/api/generate_user_report/${info.id}`
         );
         if (r.status == 200) {
           alert(`Report Sent to Your Mail! Check it out.`);
@@ -162,7 +162,7 @@ export default {
       this.status = JSON.parse(localStorage.getItem("info")).status;
       try {
         const r = await axios.post(
-          "http://127.0.0.1:5000/api/user_check_permission",
+          "https://blob-backend.onrender.com/api/user_check_permission",
           null,
           {
             headers: {
@@ -172,7 +172,7 @@ export default {
         );
         if (r.status === 200) {
           const response = await axios.get(
-            `http://127.0.0.1:5000/api/getUserInfo/${this.$route.params.id}`
+            `https://blob-backend.onrender.com/api/getUserInfo/${this.$route.params.id}`
           );
           if (response.status === 200) {
             this.user_info = response.data.user_info;

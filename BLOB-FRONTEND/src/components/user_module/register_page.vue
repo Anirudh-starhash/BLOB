@@ -152,7 +152,7 @@ export default {
           this.$router.push("/register_page");
         } else {
           const response = await axios.post(
-            "http://127.0.0.1:5000/api/user_register",
+            "https://blob-backend.onrender.com/api/user_register",
             JSON.stringify({
               name: this.name,
               email: this.email,

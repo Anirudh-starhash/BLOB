@@ -52,7 +52,7 @@
            this.$router.go(-1);
         },
         async delete_(){
-           const r=await axios.delete(`https://blob-backend4.onrender.com/api/delete_admin_blob/${this.$route.params.id}`);
+           const r=await axios.delete(`https://blob-backend.onrender.com//api/delete_admin_blob/${this.$route.params.id}`);
            if(r.status==200){
                alert(r.data.msg);
                this.user_id=JSON.parse(localStorage.getItem("info")).id
@@ -69,7 +69,7 @@
         else{
           this.id=JSON.parse(localStorage.getItem("info")).id;
           try{
-            const r=await axios.post("https://blob-backend4.onrender.com/api/user_check_permission",null,
+            const r=await axios.post("https://blob-backend.onrender.com//api/user_check_permission",null,
               {
                 headers:{
                   Authorization:`Bearer ${access_token}`

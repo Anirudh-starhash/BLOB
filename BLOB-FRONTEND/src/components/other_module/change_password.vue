@@ -140,7 +140,7 @@ import Forgot_password from './forgot_password.vue';
           this.confirm_new=""
         }
         if(this.new_password==this.confirm_new){
-          const r=await axios.post("http://127.0.0.1:5000/api/change_password",
+          const r=await axios.post("https://blob-backend.onrender.com/api/change_password",
             JSON.stringify({
               'id':JSON.parse(localStorage.getItem("info")).id,
               'new_password':this.new_password,

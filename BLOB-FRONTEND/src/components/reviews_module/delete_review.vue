@@ -53,7 +53,7 @@
         },
         async delete_(){
            this.id=JSON.parse(localStorage.getItem("info")).id
-           const r=await axios.delete(`http://127.0.0.1:5000/api/delete_review/${this.$route.params.id}/${this.id}`);
+           const r=await axios.delete(`https://blob-backend.onrender.com/api/delete_review/${this.$route.params.id}/${this.id}`);
            if(r.status==200){
                alert(r.data.msg);
                this.user_id=JSON.parse(localStorage.getItem("info")).id
@@ -70,7 +70,7 @@
         else{
           this.id=JSON.parse(localStorage.getItem("info")).id;
           try{
-            const r=await axios.post("http://127.0.0.1:5000/api/user_check_permission",null,
+            const r=await axios.post("https://blob-backend.onrender.com/api/user_check_permission",null,
               {
                 headers:{
                   Authorization:`Bearer ${access_token}`

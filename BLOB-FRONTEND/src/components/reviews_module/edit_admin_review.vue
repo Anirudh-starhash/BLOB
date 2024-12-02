@@ -71,13 +71,13 @@ export default {
       else {
         this.id = JSON.parse(localStorage.getItem('info')).id
         try {
-          const r = await axios.post("http://127.0.0.1:5000/api/user_check_permission", null, {
+          const r = await axios.post("https://blob-backend.onrender.com/api/user_check_permission", null, {
             headers: {
               Authorization: `Bearer ${access_token}`
             }
           });
           if (r.status === 200) {
-            const response=await axios.get(`http://127.0.0.1:5000/api/getAdminInfoReview/${this.$route.params.id}`);
+            const response=await axios.get(`https://blob-backend.onrender.com/api/getAdminInfoReview/${this.$route.params.id}`);
             if(response.status==200){
                 this.title=response.data.review['rating'];
                 this.name=response.data.review['review_name'];
@@ -105,7 +105,7 @@ export default {
         async edit_blog(){
             try{
                 this.id=JSON.parse(localStorage.getItem("info")).id
-                const response=await axios.put(`http://127.0.0.1:5000/api/edit_admin_review/${this.$route.params.id}/${this.id}`,
+                const response=await axios.put(`https://blob-backend.onrender.com/api/edit_admin_review/${this.$route.params.id}/${this.id}`,
                     JSON.stringify({
                     title:this.name,
                     rating:this.title,

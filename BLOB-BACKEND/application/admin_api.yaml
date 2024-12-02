@@ -4,7 +4,7 @@ info:
   description: Admin API documentation for the application
   version: 1.0.0
 servers:
-  - url: http://localhost:5000/api
+  - url: https://blob-backend.onrender.com/api
 paths:
   /admin_login:
     post:

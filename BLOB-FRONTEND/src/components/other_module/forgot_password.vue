@@ -117,7 +117,7 @@
 
       this.email=JSON.parse(localStorage.getItem("info")).email
 
-      const r=await axios.post(`http://127.0.0.1:5000/api/sendOtp/${this.email}`);
+      const r=await axios.post(`https://blob-backend.onrender.com/api/sendOtp/${this.email}`);
       if(r.status==200){
         this.original_otp=r.data.original_otp;
 
@@ -132,7 +132,7 @@
       async changePassword(){
         if(this.new_password==this.confirm_new){
                 if(this.otp==this.original_otp){
-                    const r=await axios.post("http://127.0.0.1:5000/api/change_password2",
+                    const r=await axios.post("https://blob-backend.onrender.com/api/change_password2",
                         JSON.stringify(
                             {
                                 'id':JSON.parse(localStorage.getItem("info")).id,

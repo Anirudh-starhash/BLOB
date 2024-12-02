@@ -65,7 +65,7 @@
       },
       async getreport(){
         try{
-          const r=await axios.get("http://127.0.0.1:5000/api/generate_report");
+          const r=await axios.get("https://blob-backend.onrender.com/api/generate_report");
           if(r.status==200){
             alert(`Report Sent to Mail Check it out`)
           }
@@ -82,13 +82,13 @@
         this.$router.push("/admin_page");
       } else {
         try {
-          const r = await axios.post("http://127.0.0.1:5000/api/lib_check_permission", null, {
+          const r = await axios.post("https://blob-backend.onrender.com/api/lib_check_permission", null, {
             headers: {
               Authorization: `Bearer ${access_token}`,
             },
           });
           if (r.status === 200) {
-            const response = await axios.get("http://127.0.0.1:5000/api/getAnalysisDetails");
+            const response = await axios.get("https://blob-backend.onrender.com/api/getAnalysisDetails");
             this.section_info = response.data.section_info; // Populate section_info with data
           } else {
             localStorage.clear();

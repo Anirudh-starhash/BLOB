@@ -55,7 +55,7 @@
         async logout(){
             const access_token=localStorage.getItem("access_token")
             try{
-                const response=await axios.post("http://127.0.0.1:5000/api/user_logout",null,
+                const response=await axios.post("https://blob-backend.onrender.com/api/user_logout",null,
                     {
                         headers:{
                             Authorization:`Bearer ${access_token}`
@@ -85,7 +85,7 @@
         else{
           this.id=JSON.parse(localStorage.getItem("info")).id;
           try{
-            const r=await axios.post("http://127.0.0.1:5000/api/user_check_permission",null,
+            const r=await axios.post("https://blob-backend.onrender.com/api/user_check_permission",null,
               {
                 headers:{
                   Authorization:`Bearer ${access_token}`

@@ -55,13 +55,13 @@ export default {
       else {
         this.name_ = JSON.parse(localStorage.getItem('info')).name
         try {
-          const r = await axios.post("http://127.0.0.1:5000/api/user_check_permission", null, {
+          const r = await axios.post("https://blob-backend.onrender.com/api/user_check_permission", null, {
             headers: {
               Authorization: `Bearer ${access_token}`
             }
           });
           if (r.status === 200) {
-            const response=await axios.get(`http://127.0.0.1:5000/api/getAInfoReview/${this.$route.params.id}`,);
+            const response=await axios.get(`https://blob-backend.onrender.com/api/getAInfoReview/${this.$route.params.id}`,);
             if(response.status===200){
                 this.review=response.data.review
             }

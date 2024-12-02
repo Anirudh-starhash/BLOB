@@ -66,7 +66,7 @@ export default {
       else {
         this.id = JSON.parse(localStorage.getItem('info')).id
         try {
-          const r = await axios.post("http://127.0.0.1:5000/api/user_check_permission", null, {
+          const r = await axios.post("https://blob-backend.onrender.com/api/user_check_permission", null, {
             headers: {
               Authorization: `Bearer ${access_token}`
             }
@@ -92,7 +92,7 @@ export default {
         async send_request(){
             try{
                 this.user_id=JSON.parse(localStorage.getItem("info")).id
-                const response=await axios.post(`http://127.0.0.1:5000/api/send_request/${this.user_id}`,
+                const response=await axios.post(`https://blob-backend.onrender.com/api/send_request/${this.user_id}`,
                     JSON.stringify({
                     name:this.name,
                     email:this.email,

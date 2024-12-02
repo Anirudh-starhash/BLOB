@@ -99,7 +99,7 @@
         }
         else{
           try{
-            const r=await axios.post("http://127.0.0.1:5000/api/lib_check_permission",null,
+            const r=await axios.post("https://blob-backend.onrender.com/api/lib_check_permission",null,
               {
                 headers:{
                   Authorization:`Bearer ${access_token}`
@@ -108,7 +108,7 @@
             );
             if(r.status===200){
                // write when you code this page
-               const response=await axios.get(`http://127.0.0.1:5000/api/getAllUserDetails`);
+               const response=await axios.get(`https://blob-backend.onrender.com/api/getAllUserDetails`);
                this.user_list=response.data.user_list
               //  alert(JSON.stringify(response.data.user_list))
             }

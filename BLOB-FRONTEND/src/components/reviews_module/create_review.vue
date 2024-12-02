@@ -71,7 +71,7 @@ export default {
       else {
         this.id = JSON.parse(localStorage.getItem('info')).id
         try {
-          const r = await axios.post("http://127.0.0.1:5000/api/user_check_permission", null, {
+          const r = await axios.post("https://blob-backend.onrender.com/api/user_check_permission", null, {
             headers: {
               Authorization: `Bearer ${access_token}`
             }
@@ -97,7 +97,7 @@ export default {
         async add_blog(){
             try{
               this.id=JSON.parse(localStorage.getItem("info")).id
-                const response=await axios.post(`http://127.0.0.1:5000/api/create_review/${this.$route.params.id}/${this.id}`,
+                const response=await axios.post(`https://blob-backend.onrender.com/api/create_review/${this.$route.params.id}/${this.id}`,
                     JSON.stringify({
                     title:this.name,
                     rating:this.title,

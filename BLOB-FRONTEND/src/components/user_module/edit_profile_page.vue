@@ -80,7 +80,7 @@
           info.name = this.name;
           info.email = this.email;
           localStorage.setItem("info",JSON.stringify(info));
-          const response=await axios.post("http://127.0.0.1:5000/api/edit_profile",
+          const response=await axios.post("https://blob-backend.onrender.com/api/edit_profile",
             JSON.stringify({
               id:this.id,
               name:this.name,
@@ -112,7 +112,7 @@
         else{
             this.id=JSON.parse(localStorage.getItem("info")).id
             try{
-                const r=await axios.post("http://127.0.0.1:5000/api/user_check_permission",null,
+                const r=await axios.post("https://blob-backend.onrender.com/api/user_check_permission",null,
                 {
                     headers:{
                     Authorization:`Bearer ${access_token}`
@@ -120,7 +120,7 @@
                 }
                 );
                 if(r.status===200){
-                    const response=await axios.get(`http://127.0.0.1:5000/api/getProfile/${this.id}`)
+                    const response=await axios.get(`https://blob-backend.onrender.com/api/getProfile/${this.id}`)
                     this.profile_pic=response.data.profile_details["profile_pic"]
                     this.name=response.data.profile_details["name"]
                     this.email=response.data.profile_details["email"]

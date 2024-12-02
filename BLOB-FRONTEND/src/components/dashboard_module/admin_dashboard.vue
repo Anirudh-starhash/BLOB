@@ -132,7 +132,7 @@
     }
     else{
       try{
-        const response=await axios.post("http://127.0.0.1:5000/api/lib_check_permission",null,
+        const response=await axios.post("https://blob-backend.onrender.com/api/lib_check_permission",null,
                     {
                         headers:{
                             Authorization:`Bearer ${access_token}`
@@ -147,7 +147,7 @@
             this.$router.push("/unauthorized");
          }
          else{
-          const response=await axios.get(`http://127.0.0.1:5000/api/getAllInfo`);
+          const response=await axios.get(`https://blob-backend.onrender.com/api/getAllInfo`);
                 // console.log("Hello")
                 if(response.status===200){
                   this.admin_blogs=response.data.blogs;
