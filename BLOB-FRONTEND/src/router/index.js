@@ -36,6 +36,8 @@ import change_password from '@/components/other_module/change_password.vue'
 import monitor_page from '@/components/other_module/monitor_page.vue'
 import forgot_password from '@/components/other_module/forgot_password.vue'
 import user_header from '@/components/user_module/user_header.vue'
+import profile_page from '@/components/user_module/profile_page.vue'
+import edit_profile_page from '@/components/user_module/edit_profile_page.vue'
 
 
 const router = createRouter({
@@ -227,6 +229,16 @@ const router = createRouter({
       path:'/user_header',
       name:'user_header',
       component:user_header
+    },
+    {
+      path:'/profile_page/:id',
+      name:'profile_page',
+      component:profile_page
+    },
+    {
+      path:'/edit_profile_page',
+      name:'edit_profile_page',
+      component:edit_profile_page
     },
   ],
 

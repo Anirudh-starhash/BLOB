@@ -48,9 +48,7 @@
 
         <div class="buttons">
           <div>
-            <a href="/">
-              <button :class="['btn', isDarkMode ? 'btn-dark' : 'btn-secondary', 'p-3', 'lh-1']">Home</button>
-            </a>
+              <button :class="['btn', isDarkMode ? 'btn-dark' : 'btn-secondary', 'p-3', 'lh-1']"  @click="back">Cancel</button>
           </div>
          
         </div>
@@ -123,6 +121,17 @@ import Forgot_password from './forgot_password.vue';
     methods: {
       toggleDarkMode() {
         this.isDarkMode = !this.isDarkMode;
+      },
+      back(){
+        let role=JSON.parse(localStorage.getItem("info")).role;
+        if(role=="admin"){
+          this.$router.push({path:`/admim_dashboard`})
+        }
+        else{
+          let id=JSON.parse(localStorage.getItem("info")).id
+          this.$router.push({path:`/user_dashboard/${id}`})
+        }
+
       },
       async changePassword(){
         if(this.new_password==this.old_password){

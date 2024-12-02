@@ -8,13 +8,15 @@ class User(db.Model):
     user_email = db.Column(db.String(128), unique=True)  # Added uniqueness for emails
     password = db.Column(db.String(128))
     is_privileged = db.Column(db.String(128), default=0)
+    profile_pic= db.Column(db.String(128), default=None)
     
     def to_dict(self):
         return {
             'user_id': self.user_id,
             'user_name': self.user_name,
             'user_email': self.user_email,
-            'is_privileged': self.is_privileged
+            'is_privileged': self.is_privileged,
+            'profile_pic': self.profile_pic
         }
 
     
@@ -24,12 +26,14 @@ class Admin(db.Model):
     admin_name = db.Column(db.String(128))
     admin_email = db.Column(db.String(128), unique=True)  # Ensuring unique emails
     password = db.Column(db.String(128))
+    profile_pic= db.Column(db.String(128), default=None)
 
     def to_dict(self):
         return {
             'admin_id': self.admin_id,
             'admin_name': self.admin_name,
-            'admin_email': self.admin_email
+            'admin_email': self.admin_email,
+            'profile_pic': self.profile_pic
         }
 
 class Blog(db.Model):

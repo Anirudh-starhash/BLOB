@@ -463,4 +463,87 @@ def sendOtp(email):
         'original_otp':random_number
     }),200
 
+#get Profile   
+
+
+@user_blueprint.route("/getProfile/<int:id>",methods=['GET','POST'])
+def getProfile(id):
+    user=db.session.execute(db.Select(User).where(User.user_id==id)).scalar()
+    
+    if user==None:
+        return jsonify({
+            'msg':'Some Error!'
+        }),201
+        
+    else:
+        profile_details={
+            'user_id':user.user_id,
+            'name':user.user_name,
+            'profile_pic':user.profile_pic,
+            'email':user.user_email,
+        }
+        return jsonify({
+            'profile_details':profile_details
+        }),200
+
+import shutil       
+@user_blueprint.route("/upload_pic",methods=['POST','GET'])
+def upload_pic():
+    try :
+        file = request.get_json()['file']  # Assuming the client sends the file name in JSON format
+
+        # Make the script executable
+        script_path = "./script.sh"
+        # Absolute path to script.sh
+        script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "script.sh")
+
+        # Run the script using the absolute path
+        result=os.system(f"bash {script_path}  {file}")
+
+       
+        # Run the shell script and capture the result
+
+        # Check if the script executed successfully
+        if result == 0:
+            print(f"File '{file}' passed to script.sh successfully.")
+            return jsonify({'msg': 'File passed to script successfully!'}), 200
+        else:
+            print(f"Error: script.sh failed with status {result}")
+            return jsonify({'error': 'Shell script execution failed'}), 500
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return jsonify({'error': str(e)}), 500
+   
+        
+    
+    
+    
+        
+#edit_profile
+@user_blueprint.route("/edit_profile",methods=['GET','POST'])
+def edit_profile():
+    data=request.get_json()
+    id=data.get("id")
+    name=data.get("name")
+    email=data.get("email")
+    type=data.get("type")
+    profile_pic=data.get("profile_pic")
+    
+    user=db.session.execute(db.Select(User).where(User.user_id==id)).scalar()
+    
+    if user==None:
+        return jsonify({
+            'msg':'Some Error!'
+        }),201
+        
+    else:
+        user.profile_pic=profile_pic
+        user.user_name=name
+        user.user_email=email
+        db.session.commit()
+        
+        return jsonify({
+            'msg':'Success!'
+            
+        }),200
     
