@@ -7,7 +7,7 @@
         
         <h1 class="h1light">Hey {{ name_ }} <span v-if="status == 1">(Privileged)</span> </h1>
         <div class="y">
-            <h3>If You want to Change Password -> &nbsp;</h3>
+            <h3>If You want to Change Password1 -> &nbsp;</h3>
             <a href="/change_password">
               <button :class="['btn','btn-success', 'p-3', 'lh-1']">Change Password</button>
             </a>
