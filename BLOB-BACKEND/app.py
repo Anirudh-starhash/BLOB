@@ -19,8 +19,6 @@ app=None
 celery=None
 api=None
 
-
-
 def create_app():
     global app,cache
     app = Flask(__name__)
