@@ -74,6 +74,12 @@
         },
       async editProfile(){
         try{
+          let info = JSON.parse(localStorage.getItem("info")) || {};
+
+          // Update only the name and email keys
+          info.name = this.name;
+          info.email = this.email;
+          localStorage.setItem("info",JSON.stringify(info));
           const response=await axios.post("http://127.0.0.1:5000/api/edit_profile",
             JSON.stringify({
               id:this.id,
