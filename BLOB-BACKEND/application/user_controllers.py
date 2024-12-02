@@ -486,39 +486,6 @@ def getProfile(id):
             'profile_details':profile_details
         }),200
 
-import shutil       
-@user_blueprint.route("/upload_pic",methods=['POST','GET'])
-def upload_pic():
-    try :
-        file = request.get_json()['file']  # Assuming the client sends the file name in JSON format
-
-        # Make the script executable
-        script_path = "./script.sh"
-        # Absolute path to script.sh
-        script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "script.sh")
-
-        # Run the script using the absolute path
-        result=os.system(f"bash {script_path}  {file}")
-
-       
-        # Run the shell script and capture the result
-
-        # Check if the script executed successfully
-        if result == 0:
-            print(f"File '{file}' passed to script.sh successfully.")
-            return jsonify({'msg': 'File passed to script successfully!'}), 200
-        else:
-            print(f"Error: script.sh failed with status {result}")
-            return jsonify({'error': 'Shell script execution failed'}), 500
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return jsonify({'error': str(e)}), 500
-   
-        
-    
-    
-    
-        
 #edit_profile
 @user_blueprint.route("/edit_profile",methods=['GET','POST'])
 def edit_profile():

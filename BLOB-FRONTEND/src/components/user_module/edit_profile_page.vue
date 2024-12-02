@@ -75,23 +75,6 @@
               this.profile_pic = this.profile_pic
             }
             // Assuming fileInput is the input element
-
-            axios.post('http://127.0.0.1:5000/api/upload_pic',
-                JSON.stringify({
-                  'file':this.profile_pic
-
-                }),{
-                headers: {
-                    'Content-Type': 'application/json', // Required for file uploads
-                },
-            })
-                .then(response => {
-                    console.log(response.data); // Handle success response
-                })
-                .catch(error => {
-                    console.error('Error:', error.response ? error.response.data : error.message); // Handle error response
-                });
-
         },
         cancel(){
             this.$router.push({name:'profile_page',params:{id:this.id}})
