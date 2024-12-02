@@ -16,13 +16,6 @@
               <label for="exampleInputEmail1" class="form-label"><p class="x">Email address</p></label>
               <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required v-model="email">
             </div>
-            <div class="mb-7">
-              
-              <label for="exampleInputEmail1" class="form-label"><p class="x">Profile Pic</p></label>
-              <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" @change="onFileChanges1">
-              <p v-if="profile_pic" class="file-placeholder x3">Current pic: {{ profile_pic }}</p>
-              <p v-else  class="file-placeholder x3">Current pic: No Pic</p>
-            </div>
             <div v-if="email_error">Email not properly Formatted</div>
             <button  type="submit" class="btn btn-primary">Edit</button>
           </form> 
