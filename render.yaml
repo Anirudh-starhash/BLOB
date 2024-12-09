@@ -1,0 +1,27 @@
+# Exported from Render on 2024-12-09T12:54:44Z
+services:
+- type: web
+  name: BLOB-BACKEND
+  runtime: python
+  repo: https://github.com/Anirudh-starhash/BLOB
+  plan: free
+  region: oregon
+  buildCommand: pip install -r requirements.txt
+  startCommand: python app.py
+  rootDir: BLOB-BACKEND
+- type: web
+  name: BLOB-FRONTEND
+  runtime: static
+  repo: https://github.com/Anirudh-starhash/BLOB
+  buildCommand: npm install; npm run build
+  staticPublishPath: ./dist
+  routes:
+  - type: rewrite
+    source: /*
+    destination: /index.html
+  headers:
+  - path: /assets/*.css
+    name: Content-Type
+    value: text/css
+  rootDir: BLOB-FRONTEND
+version: "1"
