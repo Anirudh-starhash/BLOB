@@ -6,9 +6,9 @@ export default mergeConfig(
   viteConfig,
   defineConfig({
     test: {
-      environment: 'jsdom',
-      exclude: [...configDefaults.exclude, 'e2e/**'],
-      root: fileURLToPath(new URL('./', import.meta.url)),
+      environment: 'jsdom',  // Setting test environment to jsdom
+      exclude: [...configDefaults.exclude, 'e2e/**'],  // Exclude e2e tests
+      root: fileURLToPath(new URL('./', import.meta.url)),  // Set root for tests
     },
   }),
 )

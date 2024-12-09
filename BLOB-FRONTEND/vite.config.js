@@ -14,9 +14,9 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
-  base: './',  // Set base path to match your GitHub repository name
+  base: '/',  // Ensure base is set to the root
   build: {
-    outDir: 'dist',
-    assetsDir: 'assets',
+    outDir: 'dist',  // Build output directory
+    assetsDir: 'assets',  // Directory for assets like JS, CSS
   },
 });
