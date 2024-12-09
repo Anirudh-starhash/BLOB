@@ -15,4 +15,8 @@ export default defineConfig({
     },
   },
   base: './',  // Set base path to match your GitHub repository name
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+  },
 });
