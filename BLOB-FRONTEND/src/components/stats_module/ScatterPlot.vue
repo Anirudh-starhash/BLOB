@@ -5,15 +5,14 @@
 </template>
 
 <script>
-
-import { Chart, ScatterController, LinearScale, PointElement, Tooltip, Legend } from 'chart.js';
+import { Chart, ScatterController, LinearScale, PointElement, Tooltip, Legend } from "chart.js";
 
 Chart.register(ScatterController, LinearScale, PointElement, Tooltip, Legend);
 
 export default {
-  name: 'ScatterPlot',
+  name: "ScatterPlotBlog",
   props: {
-    sectionInfo: {
+    blogInfo: {
       type: Object,
       required: true,
     },
@@ -23,31 +22,30 @@ export default {
   },
   methods: {
     renderChart() {
-      // Create Team 1, Team 2, ... labels dynamically based on the order
-      const labels = Object.keys(this.sectionInfo).map((_, index) => `Team ${index + 1}`);
-      const dataPoints = Object.values(this.sectionInfo); // Disaster data
+      const labels = Object.keys(this.blogInfo); // Blog titles
+      const dataPoints = Object.values(this.blogInfo); // Blog statistics
 
       const data = {
         datasets: [
           {
-            label: 'Disasters Handled',
+            label: "Blog Statistics",
             data: labels.map((label, index) => {
               const info = dataPoints[index];
               return {
-                x: info.total, // x-axis is the total number of disasters handled
-                y: info.successRate, // y-axis is the success rate of the disaster handling
-                label: label, // Store the disaster team name
+                x: info.totalViews, // x-axis is the total views
+                y: info.popularityRate, // y-axis is the popularity rate
+                label: label, // Blog title
                 details: info, // Store additional details for use in tooltips
               };
             }),
-            backgroundColor: '#FF6384',
-            pointBorderColor: '#36A2EB',
-            pointBackgroundColor: '#FFCE56',
+            backgroundColor: "#FF5733",
+            pointBorderColor: "#36A2EB",
+            pointBackgroundColor: "#FFCE56",
             pointBorderWidth: 2,
             pointRadius: 6,
-            hoverBackgroundColor: '#FF9F40', // Change color on hover
+            hoverBackgroundColor: "#FF9F40", // Change color on hover
             hoverBorderWidth: 3,
-            hoverBorderColor: '#FF5733',
+            hoverBorderColor: "#FF5733",
           },
         ],
       };
@@ -63,36 +61,36 @@ export default {
             enabled: true,
             callbacks: {
               title: function (tooltipItem) {
-                return `Team: ${tooltipItem[0].raw.label}`; // Show the team name (e.g., Team 1)
+                return `Blog: ${tooltipItem[0].raw.label}`; // Show the blog title
               },
               label: function (tooltipItem) {
                 const { details } = tooltipItem[0].raw;
-                return `Success Rate: ${details.successRate}%\nTotal Disasters: ${details.total}\nLocation: ${details.location}\nTime: ${details.time}`;
+                return `Popularity Rate: ${tooltipItem[0].raw.y}%\nTotal Views: ${details.totalViews}`;
               },
             },
           },
         },
         scales: {
           x: {
-            type: 'linear',
-            position: 'bottom',
+            type: "linear",
+            position: "bottom",
             title: {
               display: true,
-              text: 'Total Disasters Handled',
+              text: "Total Views",
             },
           },
           y: {
             beginAtZero: true,
             title: {
               display: true,
-              text: 'Success Rate (%)',
+              text: "Popularity Rate (%)",
             },
           },
         },
       };
 
       new Chart(this.$refs.scatterChart, {
-        type: 'scatter',
+        type: "scatter",
         data: data,
         options: options,
       });

@@ -8,10 +8,10 @@
         <h2 :class="[isDarkMode ? 'h2dark' : 'h2light']">{{ stats_status }}</h2>
         
         <div class="com">
-          <PieChart v-if="Object.keys(section_info).length" :sectionInfo="section_info" />
-          <HeatMap v-if="Object.keys(section_info).length" :sectionInfo="section_info" />
-          <Histogram v-if="Object.keys(section_info).length" :sectionInfo="section_info" />
-          <BarChart v-if="Object.keys(section_info).length" :sectionInfo="section_info" />
+          <PieChart v-if="Object.keys(blogInfo).length" :blogInfo="blogInfo" />
+          <HeatMap v-if="Object.keys(blogInfo).length" :blogInfo="blogInfo" />
+          <Histogram v-if="Object.keys(blogInfo).length" :blogInfo="blogInfo" />
+          <BarChart v-if="Object.keys(blogInfo).length" :blogInfo="blogInfo" />
         </div>
   
         <div class="action-button" @click="getreport">
@@ -44,7 +44,7 @@
         stats_status: 'Stats Page is up to date',
         monitor_status: 'No Users to Monitor Currently',
         isDarkMode: false,
-        section_info: {}, // Initialize as empty
+        blogInfo: {}, // Initialize as empty
       };
     },
     components: {
@@ -89,7 +89,7 @@
           });
           if (r.status === 200) {
             const response = await axios.get("https://blob-backend.onrender.com/api/getAnalysisDetails");
-            this.section_info = response.data.section_info; // Populate section_info with data
+            this.blogInfo = response.data.blogInfo; // Populate blogInfo with data
           } else {
             localStorage.clear();
             this.$router.push("/unauthorized");

@@ -5,9 +5,9 @@
         <div class="main-content">
           <h2 :class="[isDarkMode?'h2dark':'h2light']">{{stats_status}}</h2>
           <div class="com">
-            <BarChart v-if="Object.keys(section_info).length" :sectionInfo="section_info" />
-            <Chart3d v-if="Object.keys(section_info).length" :sectionInfo="section_info" />
-            <ScatterPlot v-if="Object.keys(section_info).length" :sectionInfo="section_info" />
+            <BarChart v-if="Object.keys(blogInfo).length" :blogInfo="blogInfo" />
+            <Chart3d v-if="Object.keys(blogInfo).length" :blogInfo="blogInfo" />
+            <ScatterPlot v-if="Object.keys(blogInfo).length" :blogInfo="blogInfo" />
           </div>
         </div>
         <footer_page/>
@@ -34,7 +34,7 @@
         return_status:'No Books to return Currently',
         isDarkMode:false,
         id:"",
-        section_info: {},
+        blogInfo: {},
         status:''
   
       }
@@ -71,7 +71,7 @@
             );
             if(r.status===200){
               const response = await axios.get(`https://blob-backend.onrender.com/api/getAnalysisDetails`);
-              this.section_info = response.data.section_info;
+              this.blogInfo = response.data.blogInfo;
             }
             else{
               localStorage.removeItem("access_token")

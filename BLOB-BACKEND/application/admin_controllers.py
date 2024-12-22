@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, Flask, send_from_directory, render_template,redirect
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, unset_jwt_cookies
 from werkzeug.security import generate_password_hash, check_password_hash
-from application.models import Admin, User, User_issue, DisasterAnalysis
+from application.models import Admin, User, User_issue, BlogAnalysis
 from application.database import db
 from datetime import timedelta, datetime
 from fpdf import FPDF
@@ -352,12 +352,12 @@ def revokeUser():
 
 @lib_blueprint.route('/getAnalysisDetails', methods=['GET','POST'])
 def get_analysis_details():
-    disaster_data=db.session.execute(db.Select(DisasterAnalysis)).scalars().all()
-    dis_serialized = [dis.to_dict() for dis in disaster_data]
+    blog_data=db.session.execute(db.Select(BlogAnalysis)).scalars().all()
+    blob_serialized = [blo.to_dict() for blo in blog_data]
     
     # print(dis_serialized)
     return jsonify({
-        'section_info':dis_serialized
+        'blogInfo':blob_serialized
     }),200
     
 def send_email(user_email, subject, body, pdf_path):
@@ -397,11 +397,11 @@ def send_email(user_email, subject, body, pdf_path):
 
 def send_activity_report():
     # Step 1: Fetch data from DisasterAnalysis table
-    disaster_data = DisasterAnalysis.query.all()
-    disaster_records = [record.to_dict() for record in disaster_data]
+    blog_data = BlogAnalysis.query.all()
+    blog_records = [record.to_dict() for record in blog_data]
     
     # Step 2: Generate PDF
-    pdf_path = generate_pdf(disaster_records)
+    pdf_path = generate_pdf(blog_records)
     
     # Step 3: Send the PDF via email
     recipient_email = "anirudhpabbaraju1103@gmail.com"  # Replace with actual recipient email

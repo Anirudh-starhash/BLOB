@@ -12,7 +12,7 @@ Chart.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 export default {
   name: 'HistogramChart',
   props: {
-    sectionInfo: {
+    blogInfo: {
       type: Object,
       required: true,
     },
@@ -22,21 +22,21 @@ export default {
   },
   methods: {
     renderChart() {
-      // Create Team 1, Team 2, ... labels dynamically based on the order
-      const labels = Object.keys(this.sectionInfo).map((_, index) => `Team ${index + 1}`);
+      // Create labels dynamically based on blog post titles
+      const labels = Object.keys(this.blogInfo); // Blog post titles
 
-      const disasterCounts = Object.values(this.sectionInfo).map(info => info.total); // Total disasters
+      const totalViews = Object.values(this.blogInfo).map(info => info.totalViews); // Total views for each blog post
 
       const data = {
-        labels: labels, // Labels for each team
+        labels: labels, // Labels for each blog post
         datasets: [
           {
-            label: 'Disaster Frequency',
-            backgroundColor: '#36A2EB',
-            data: disasterCounts,
-            borderColor: '#1E74FF',
+            label: 'Total Views',
+            backgroundColor: '#FF6384',
+            data: totalViews,
+            borderColor: '#FF4561',
             borderWidth: 1,
-            barThickness: 30,  // Adjust thickness of the bars for a histogram effect
+            barThickness: 30, // Adjust thickness of the bars for a histogram effect
           },
         ],
       };
@@ -48,14 +48,14 @@ export default {
           x: {
             title: {
               display: true,
-              text: 'Teams',
+              text: 'Blog Posts',
             },
           },
           y: {
-            beginAtZero: true,  // Start from 0
+            beginAtZero: true, // Start from 0
             title: {
               display: true,
-              text: 'Frequency',
+              text: 'Total Views',
             },
           },
         },
@@ -63,13 +63,13 @@ export default {
           tooltip: {
             callbacks: {
               title: function (tooltipItem) {
-                const teamLabel = tooltipItem[0].label; // Get Team label (e.g., Team 1)
-                return `Team: ${teamLabel}`;
+                const postTitle = tooltipItem[0].label; // Get blog post title
+                return `Post: ${postTitle}`;
               },
               label: function (tooltipItem) {
                 const datasetLabel = tooltipItem.dataset.label || '';
-                const disasterDetails = tooltipItem.raw;
-                return `${datasetLabel}: ${disasterDetails} disasters`;
+                const totalViews = tooltipItem.raw;
+                return `${datasetLabel}: ${totalViews} views`;
               },
             },
           },

@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request,Flask, send_from_directory, render_template,redirect
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity,unset_jwt_cookies
 from werkzeug.security import generate_password_hash, check_password_hash
-from application.models import User,User_issue,DisasterAnalysis,Admin,Blog,Reviews
+from application.models import User,User_issue,BlogAnalysis,Admin,Blog,Reviews
 from application.database import db
 from datetime import timedelta,datetime
 from flask import current_app as app,Flask
@@ -288,16 +288,16 @@ def send_email(user_email, subject, body, pdf_path):
 
 def send_activity_report(email):
     # Step 1: Fetch data from DisasterAnalysis table
-    disaster_data = DisasterAnalysis.query.all()
-    disaster_records = [record.to_dict() for record in disaster_data]
+    blog_data = BlogAnalysis.query.all()
+    blog_records = [record.to_dict() for record in blog_data]
     
     # Step 2: Generate PDF
-    pdf_path = generate_pdf(disaster_records)
+    pdf_path = generate_pdf(blog_records)
     
     # Step 3: Send the PDF via email
     recipient_email = email # Replace with actual recipient email
-    subject = "Disaster Analysis Report"
-    body = "Please find attached the latest disaster analysis report."
+    subject = "Blog Analysis Report"
+    body = "Please find attached the latest Blog analysis report."
     
     send_email(recipient_email, subject, body, pdf_path)
     

@@ -12,7 +12,7 @@ Chart.register(Tooltip, Legend, CategoryScale, LinearScale, PointElement);
 export default {
   name: 'HeatmapChart',
   props: {
-    sectionInfo: {
+    blogInfo: {
       type: Object,
       required: true,
     },
@@ -26,44 +26,46 @@ export default {
         this.chart.destroy(); // Destroy previous chart instance
       }
 
-      // Prepare data for heatmap: 
-      // Using Team 1, Team 2, etc., and their total disasters and success rates
-      const labels = Object.keys(this.sectionInfo); // Team names
-      const totalDisasters = Object.values(this.sectionInfo).map(info => info.total); // Total disasters
-      const successRates = Object.values(this.sectionInfo).map(info => info.successRate); // Success rates
+      // Prepare data for heatmap:
+      // Using Blog Post titles and their total views and popularity rates
+      const labels = Object.keys(this.blogInfo); // Blog post names
+      const totalViews = Object.values(this.blogInfo).map(info => info.totalViews); // Total views
+      const popularityRates = Object.values(this.blogInfo).map(info => info.popularityRate); // Popularity rates
 
-      // Combine the two data arrays (totalDisasters and successRates) for heatmap
+      // Combine the two data arrays (totalViews and popularityRates) for heatmap
       const heatmapData = [
         ...labels.map((label, index) => ({
-          x: index + 1, // Use 1-based index for team names
-          y: totalDisasters[index],
-          label: `${label} Total Disasters`,
+          x: index + 1, // Use 1-based index for blog post names
+          y: totalViews[index],
+          label: `${label} Total Views`,
         })),
         ...labels.map((label, index) => ({
-          x: index + 1, // Use 1-based index for team names
-          y: successRates[index],
-          label: `${label} Success Rate`,
-        }))
+          x: index + 1, // Use 1-based index for blog post names
+          y: popularityRates[index],
+          label: `${label} Popularity Rate`,
+        })),
       ];
 
       const data = {
-        datasets: [{
-          label: 'Heatmap Data',
-          data: heatmapData,
-          backgroundColor: (context) => {
-            if (!context.raw) {
-              return 'rgba(0,0,0,0.1)';
-            }
+        datasets: [
+          {
+            label: 'Heatmap Data',
+            data: heatmapData,
+            backgroundColor: (context) => {
+              if (!context.raw) {
+                return 'rgba(0,0,0,0.1)';
+              }
 
-            const value = context.raw.y; // y-value (either total disasters or success rate)
-            const red = Math.min(255, value * 2);
-            const green = Math.min(255, 255 - value * 2);
-            const blue = Math.min(255, value * 1.5);
-            return `rgba(${red}, ${green}, ${blue}, 0.7)`; // Return RGBA color
+              const value = context.raw.y; // y-value (either total views or popularity rate)
+              const red = Math.min(255, value * 2);
+              const green = Math.min(255, 255 - value * 2);
+              const blue = Math.min(255, value * 1.5);
+              return `rgba(${red}, ${green}, ${blue}, 0.7)`; // Return RGBA color
+            },
+            borderWidth: 1,
+            pointRadius: 10,
           },
-          borderWidth: 1,
-          pointRadius: 10,
-        }],
+        ],
       };
 
       const options = {
@@ -71,11 +73,11 @@ export default {
         maintainAspectRatio: false,
         scales: {
           x: {
-            type: 'category', // Use category scale to display Team names as labels
-            labels: labels, // Set x-axis labels to be the team names
+            type: 'category', // Use category scale to display Blog post titles as labels
+            labels: labels, // Set x-axis labels to be the blog post names
             title: {
               display: true,
-              text: 'Teams',
+              text: 'Blog Posts',
             },
           },
           y: {
@@ -83,7 +85,7 @@ export default {
             position: 'left',
             title: {
               display: true,
-              text: 'Values (Disasters / Success Rate)',
+              text: 'Values (Views / Popularity Rate)',
             },
           },
         },
@@ -94,11 +96,11 @@ export default {
           tooltip: {
             callbacks: {
               title: function (tooltipItem) {
-                const teamIndex = tooltipItem[0].raw.x - 1; // Get the index based on x value (1-based)
-                return `Team-${teamIndex + 1}`;  // Format "Team-1", "Team-2", etc.
+                const postIndex = tooltipItem[0].raw.x - 1; // Get the index based on x value (1-based)
+                return `Blog Post: ${labels[postIndex]}`; // Format the blog post title
               },
               label: function (tooltipItem) {
-                return `Value: ${tooltipItem.raw.y}`; // Show the y-value (either total disasters or success rate)
+                return `Value: ${tooltipItem.raw.y}`; // Show the y-value (either total views or popularity rate)
               },
             },
           },

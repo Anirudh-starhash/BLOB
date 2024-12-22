@@ -5,15 +5,14 @@
 </template>
 
 <script>
-
 import { Chart, ArcElement, Tooltip, Legend, PieController } from 'chart.js';
 
-Chart.register(ArcElement, Tooltip, Legend, PieController); // Register PieController
+Chart.register(ArcElement, Tooltip, Legend, PieController);
 
 export default {
   name: 'PieChart',
   props: {
-    sectionInfo: {
+    blogInfo: {
       type: Object,
       required: true,
     },
@@ -23,40 +22,42 @@ export default {
   },
   methods: {
     renderChart() {
-      const labels = Object.keys(this.sectionInfo); // Team names
+      const labels = Object.keys(this.blogInfo); // Blog post titles
 
-      const totalDisasters = Object.values(this.sectionInfo).map(info => info.total); // Total disasters
-      const successRates = Object.values(this.sectionInfo).map(info => info.successRate); // Success rates
+      const totalViews = Object.values(this.blogInfo).map(info => info.totalViews); // Total views
+      const likePercentages = Object.values(this.blogInfo).map(
+        info => ((info.totalLikes / info.totalViews) * 100).toFixed(2)
+      ); // Calculate like percentages
 
-      // Define custom colors for each team
-      const disasterColors = [
+      // Define custom colors for each blog post
+      const viewColors = [
         '#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#FFD700',
         '#8A2BE2', '#FF6347', '#32CD32', '#FF4500', '#20B2AA',
       ];
 
-      const successRateColors = [
+      const likeColors = [
         '#FF8C00', '#8A2BE2', '#3CB371', '#DAA520', '#7B68EE',
         '#D2691E', '#FF1493', '#00BFFF', '#32CD32', '#FF4500',
       ];
 
       const data = {
-        labels: labels,  // Use Team 1, Team 2, ...
+        labels: labels,
         datasets: [
           {
-            label: 'Total Disasters Handled',
-            backgroundColor: disasterColors.slice(0, labels.length), // Assign disaster colors
-            data: totalDisasters, // Total disasters for each team
-            borderColor: '#333', // Darker border for visibility
+            label: 'Total Views',
+            backgroundColor: viewColors.slice(0, labels.length), // Assign view colors
+            data: totalViews,
+            borderColor: '#333',
             borderWidth: 1,
-            hoverOffset: 25, // 3D hover effect
+            hoverOffset: 25,
           },
           {
-            label: 'Success Rate (%)',
-            backgroundColor: successRateColors.slice(0, labels.length), // Assign success rate colors
-            data: successRates, // Success rates for each team
-            borderColor: '#333', // Darker border for visibility
+            label: 'Like Percentage (%)',
+            backgroundColor: likeColors.slice(0, labels.length), // Assign like colors
+            data: likePercentages,
+            borderColor: '#333',
             borderWidth: 1,
-            hoverOffset: 25, // 3D hover effect
+            hoverOffset: 25,
           },
         ],
       };
@@ -73,37 +74,36 @@ export default {
             },
           },
           tooltip: {
-            enabled: true,
             callbacks: {
               title: function (tooltipItem) {
-                const sectionLabel = tooltipItem[0].label; // Get section label
-                return `Section: ${sectionLabel}`;  // Display Team name
+                const blogTitle = tooltipItem[0].label;
+                return `Blog Post: ${blogTitle}`;
               },
               label: function (tooltipItem) {
                 const datasetLabel = tooltipItem.dataset.label || '';
                 const value = tooltipItem.raw;
-                if (datasetLabel === 'Total Disasters Handled') {
-                  return `${datasetLabel}: ${value} disasters`; // Display total disasters
-                } else if (datasetLabel === 'Success Rate (%)') {
-                  return `${datasetLabel}: ${value}%`; // Display success rate
+                if (datasetLabel === 'Total Views') {
+                  return `${datasetLabel}: ${value} views`;
+                } else if (datasetLabel === 'Like Percentage (%)') {
+                  return `${datasetLabel}: ${value}% likes`;
                 }
                 return '';
               },
             },
-            backgroundColor: '#333', // Dark background for tooltips
-            titleColor: '#fff', // White title text
-            bodyColor: '#fff', // White body text
+            backgroundColor: '#333',
+            titleColor: '#fff',
+            bodyColor: '#fff',
             padding: 10,
           },
         },
         animation: {
           animateRotate: {
-            duration: 1500, // Slow down the rotation animation
-            easing: 'easeOutBounce', // Add ease out bounce effect
+            duration: 1500,
+            easing: 'easeOutBounce',
           },
           animateScale: {
-            duration: 1000, // Scaling animation duration
-            easing: 'easeInOutQuad', // Easing effect
+            duration: 1000,
+            easing: 'easeInOutQuad',
           },
         },
       };
@@ -117,7 +117,7 @@ export default {
   },
   beforeDestroy() {
     if (this.chart) {
-      this.chart.destroy(); // Clean up chart instance
+      this.chart.destroy(); // Clean up the chart instance
     }
   },
 };
@@ -144,20 +144,12 @@ export default {
   transform: scale(1); /* Slight zoom on hover */
 }
 
-/* Pie chart CSS styling */
+/* Pie Chart CSS Styling */
 canvas {
   display: block;
   width: 100%;
   height: auto;
   transition: transform 0.3s ease; /* Animation for scaling */
-}
-
-/* 3D Effect for the Pie chart */
-.pie-chart-3d {
-  background-color: aliceblue;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Adding shadow for 3D effect */
 }
 
 /* Tooltip Styling */

@@ -12,7 +12,7 @@ Chart.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, BarContr
 export default {
   name: 'BarChart',
   props: {
-    sectionInfo: {
+    blogInfo: {
       type: Object,
       required: true,
     },
@@ -22,26 +22,26 @@ export default {
   },
   methods: {
     renderChart() {
-      // Create Team 1, Team 2, ... labels dynamically based on the order
-      const labels = Object.keys(this.sectionInfo).map((_, index) => `Team ${index + 1}`);
+      // Create labels dynamically based on post categories
+      const labels = Object.keys(this.blogInfo).map((_, index) => `Category ${index + 1}`);
 
-      const totalDisasters = Object.values(this.sectionInfo).map(info => info.total); // Total disasters
-      const successRates = Object.values(this.sectionInfo).map(info => info.successRate); // Success rates
+      const totalViews = Object.values(this.blogInfo).map(info => info.totalViews); // Total views
+      const popularityRates = Object.values(this.blogInfo).map(info => info.popularityRate); // Popularity rates
 
       const data = {
-        labels: labels,  // Use Team 1, Team 2, ...
+        labels: labels, // Use Category 1, Category 2, ...
         datasets: [
           {
-            label: 'Total Disasters Handled',
+            label: 'Total Views',
             backgroundColor: '#36A2EB',
-            data: totalDisasters,
+            data: totalViews,
             borderColor: '#1E74FF',
             borderWidth: 1,
           },
           {
-            label: 'Success Rate (%)',
+            label: 'Popularity Rate (%)',
             backgroundColor: '#FF6384',
-            data: successRates,
+            data: popularityRates,
             borderColor: '#FF3366',
             borderWidth: 1,
           },
@@ -53,11 +53,10 @@ export default {
         maintainAspectRatio: false,
         scales: {
           y: {
-            beginAtZero: false,  // Start from 1
-            min: 1,
+            beginAtZero: true,
             title: {
               display: true,
-              text: 'Count / Percentage',
+              text: 'Views / Popularity (%)',
             },
           },
         },
@@ -65,16 +64,16 @@ export default {
           tooltip: {
             callbacks: {
               title: function (tooltipItem) {
-                const teamLabel = tooltipItem[0].label; // Get Team label (e.g., Team 1)
-                return `Disaster Team: ${teamLabel}`;
+                const categoryLabel = tooltipItem[0].label; // Get Category label (e.g., Category 1)
+                return `Blog Category: ${categoryLabel}`;
               },
               label: function (tooltipItem) {
                 const datasetLabel = tooltipItem.dataset.label || '';
-                const disasterDetails = tooltipItem.raw;
-                if (datasetLabel === 'Total Disasters Handled') {
-                  return `${datasetLabel}: ${disasterDetails} disasters`;
-                } else if (datasetLabel === 'Success Rate (%)') {
-                  return `${datasetLabel}: ${disasterDetails}%`;
+                const blogDetails = tooltipItem.raw;
+                if (datasetLabel === 'Total Views') {
+                  return `${datasetLabel}: ${blogDetails} views`;
+                } else if (datasetLabel === 'Popularity Rate (%)') {
+                  return `${datasetLabel}: ${blogDetails}%`;
                 }
                 return '';
               },

@@ -100,27 +100,27 @@ class User_issue(db.Model):
 
      
 from datetime import datetime   
-class DisasterAnalysis(db.Model):
-    __tablename__ = 'disaster_analysis'
+class BlogAnalysis(db.Model):
+    __tablename__ = 'blog_analysis'
     id = db.Column(db.Integer, primary_key=True)
-    disaster_name = db.Column(db.String(100), nullable=False)
-    time = db.Column(db.DateTime, default=datetime.utcnow)
-    location = db.Column(db.String(200), nullable=False)
-    success_rate = db.Column(db.Float, nullable=False)
-    total = db.Column(db.Integer, nullable=False)
+    post_name = db.Column(db.String(100), nullable=False)
+    category = db.Column(db.String(100), nullable=False)
+    time_posted = db.Column(db.DateTime, default=datetime.utcnow)
+    popularity_rate = db.Column(db.Float, nullable=False)
+    total_views = db.Column(db.Integer, nullable=False)
     
     def to_dict(self):
         return {
             'id': self.id,
-            'disaster_name': self.disaster_name,
-            'time': self.time.strftime('%Y-%m-%d %H:%M:%S'),
-            'location': self.location,
-            'success_rate': self.success_rate,
-            'total': self.total
+            'post_name': self.post_name,
+            'category': self.category,
+            'time_posted': self.time_posted.strftime('%Y-%m-%d %H:%M:%S'),
+            'popularity_rate': self.popularity_rate,
+            'total_views': self.total_views,
         }
     
     def __repr__(self):
-        return f'<DisasterAnalysis {self.disaster_name} in {self.location}>'
+        return f'<BlogAnalysis {self.post_name} in category {self.category}>'
     
 class Reviews(db.Model):
     __tablename__ = 'reviews'
