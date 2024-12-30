@@ -89,7 +89,7 @@
           });
           if (r.status === 200) {
             const response = await axios.get("https://blob-backend.onrender.com/api/getAnalysisDetails");
-            this.blogInfo = response.data.blogInfo; // Populate blogInfo with data
+            this.blogInfo = response.data.blogInfo || {}// Populate blogInfo with data
           } else {
             localStorage.clear();
             this.$router.push("/unauthorized");
