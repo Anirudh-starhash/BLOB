@@ -8,10 +8,11 @@
         <h2 :class="[isDarkMode ? 'h2dark' : 'h2light']">{{ stats_status }}</h2>
         
         <div class="com">
-          <PieChart v-if="Object.keys(blogInfo).length" :blogInfo="blogInfo" />
-          <HeatMap v-if="Object.keys(blogInfo).length" :blogInfo="blogInfo" />
-          <Histogram v-if="Object.keys(blogInfo).length" :blogInfo="blogInfo" />
-          <BarChart v-if="Object.keys(blogInfo).length" :blogInfo="blogInfo" />
+          <PieChart v-if="blogInfo && Object.keys(blogInfo).length" :blogInfo="blogInfo" />
+          <HeatMap v-if="blogInfo && Object.keys(blogInfo).length" :blogInfo="blogInfo" />
+          <Histogram v-if="blogInfo && Object.keys(blogInfo).length" :blogInfo="blogInfo" />
+          <BarChart v-if="blogInfo && Object.keys(blogInfo).length" :blogInfo="blogInfo" />
+
         </div>
   
         <div class="action-button" @click="getreport">
