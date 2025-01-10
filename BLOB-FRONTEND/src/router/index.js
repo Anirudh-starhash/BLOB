@@ -20,9 +20,7 @@ import admin_delete_blogs from '@/components/blog_module/admin_delete_blogs.vue'
 import other_users_page from '../components/user_module/other_users_page.vue'
 import request_page from '@/components/other_module/request_page.vue'
 import user_request_page from '@/components/other_module/user_request_page.vue'
-import user_stats_page from '@/components/stats_module/user_stats_page.vue'
 import user_status_page from '@/components/user_module/user_status_page.vue'
-import admin_stats_page from '@/components/stats_module/admin_stats_page.vue'
 import send_alert_form from '@/components/alert_module/send_alert_form.vue'
 import create_admin_review from '@/components/reviews_module/create_admin_review.vue'
 import create_review from '@/components/reviews_module/create_review.vue'
@@ -151,19 +149,9 @@ const router = createRouter({
       component:user_request_page
     },
     {
-      path:'/user_stats_page/:id',
-      name:'user_stats_page',
-      component:user_stats_page
-    },
-    {
       path:'/user_status_page/:id',
       name:'user_status_page',
       component:user_status_page
-    },
-    {
-      path:'/admin_stats_page',
-      name:'admin_stats_page',
-      component:admin_stats_page
     },
     {
       path:'/send_alert_form/:id',
