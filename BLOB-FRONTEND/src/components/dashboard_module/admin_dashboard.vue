@@ -128,7 +128,7 @@
     const access_token=localStorage.getItem("access_token");
     if(!access_token){
       alert('You need to login first to come here!')
-      this.$router.push("/librarian_page");
+      this.$router.push("/admin_page");
     }
     else{
       try{

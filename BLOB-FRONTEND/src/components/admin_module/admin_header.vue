@@ -9,7 +9,6 @@
         <div class="right">
           <p class="nav-item" v-if="showRequests" @click="requests">Requests</p>
           <p class="nav-item" v-if="showMonitor" @click="monitor_page">Monitor</p>
-          <p class="nav-item" v-if="showStats" @click="stats">Stats</p>
           <p class="nav-item logout" @click="logout">Logout</p>
         </div>
       </div>
@@ -22,7 +21,6 @@ export default {
   name: 'librarian_header',
   props: {
     showRequests: { type: Boolean, default: true },
-    showStats: { type: Boolean, default: true },
     showMonitor: { type: Boolean, default: true },
     isDarkMode: { type: Boolean, default: false }
   },
@@ -30,7 +28,6 @@ export default {
     home() { this.$router.push("/admin_dashboard"); },
     logout() { this.$router.push({ path: '/logout_page' }); },
     requests() { this.$router.push("/request_page"); },
-    stats() { this.$router.push("/admin_stats_page"); },
     monitor_page() { this.$router.push("/monitor_page"); }
   }
 };

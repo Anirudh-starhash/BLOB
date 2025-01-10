@@ -10,7 +10,6 @@
           <div class="right">
             <p class="nav-item" v-if="showProfile"  @click="profile">Profile Page</p>
             <p class="nav-item" v-if="showOtherUsers" @click="otherusers">Other-Users-Page</p>
-            <p class="nav-item" v-if="showStats" @click="stats">Stats</p>
             <p class="nav-item" v-if="showRequests" @click="requests_form">Requests-Admin</p>
             <p class="nav-item" v-if="showStatus" @click="status">Privileged Status</p>
             <p class="nav-item logout" @click="logout">Logout</p>
@@ -28,10 +27,6 @@
         }
     },
     props: {
-        showStats: {
-            type: Boolean,
-            default: true
-        },
         showStatus: {
             type: Boolean,
             default: false
@@ -62,11 +57,6 @@
         var userInfo = JSON.parse(localStorage.getItem('info'));
         var userId = userInfo.id;
         this.$router.push({name:'user_dashboard',params:{id:userId}});
-      },
-      stats(){
-        var userInfo = JSON.parse(localStorage.getItem('info'));
-        var userId = userInfo.id;
-        this.$router.push({name:'user_stats_page',params:{id:userId}});
       },
       status(){
         var userInfo = JSON.parse(localStorage.getItem('info'));
