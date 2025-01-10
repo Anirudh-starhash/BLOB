@@ -78,7 +78,7 @@ export default {
     },
     methods:{
         back(){
-            this.$router.push({path:'/admin_dashboard'})
+            this.$router.go(-1);
         },
         add_review(){
             this.id=this.$route.params.id
